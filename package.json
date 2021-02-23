@@ -4,7 +4,8 @@
   "description": "A marketplace for AskBob.",
   "main": "main.js",
   "dependencies": {
-    "electron": "^11.2.3"
+    "electron": "^11.2.3",
+    "python-shell": "^2.0.3"
   },
   "devDependencies": {},
   "scripts": {

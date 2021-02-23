@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, dialog } = require('electron')
 const path = require('path')
 
 function createWindow() {
@@ -19,7 +19,19 @@ function createWindow() {
   mainWindow.loadFile('index.html')
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
+}
+
+// Create a folder selection dialogue
+async function selectBuildFolder() {
+  const files = await dialog.showOpenDialog({
+    title: 'Select AskBob Build Location Folder',
+    properties: [
+      'openDirectory', 'createDirectory'
+    ]
+  })
+
+  return !files.canceled && files.filePaths.length == 1 ? files.filePaths[0] : undefined
 }
 
 // This method will be called when Electron has finished
@@ -33,6 +45,9 @@ app.whenReady().then(() => {
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
+
+  // Jezz testing :-)
+
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common
