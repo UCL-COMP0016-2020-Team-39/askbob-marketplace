@@ -4,3 +4,13 @@
 // `nodeIntegration` is turned off. Use `preload.js` to
 // selectively enable features needed in the rendering
 // process.
+
+document.getElementById('buildFolderSelector').addEventListener('click', () => {
+    window.api.send('selectBuildFolder')
+})
+
+window.api.receive('buildFolderSelected', (location) => {
+    if (location) {
+        document.getElementById('buildFolderLabel').innerText = location
+    }
+})

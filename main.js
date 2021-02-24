@@ -1,14 +1,19 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, dialog } = require('electron')
+const { app, BrowserWindow, dialog, ipcMain } = require('electron')
 const path = require('path')
 
-function createWindow() {
+let mainWindow
+
+async function createWindow() {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: false,
+      contextIsolation: true,
+      enableRemoteModule: false
     }
   })
 
@@ -33,6 +38,10 @@ async function selectBuildFolder() {
 
   return !files.canceled && files.filePaths.length == 1 ? files.filePaths[0] : undefined
 }
+
+ipcMain.on('selectBuildFolder', async (event, args) => {
+  mainWindow.webContents.send('buildFolderSelected', await selectBuildFolder())
+})
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

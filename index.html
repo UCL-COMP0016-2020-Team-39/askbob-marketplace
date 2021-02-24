@@ -10,10 +10,23 @@
 </head>
 
 <body>
-  <h1>Hello World!</h1>
-  We are using Node.js <span id="node-version"></span>,
-  Chromium <span id="chrome-version"></span>,
-  and Electron <span id="electron-version"></span>.
+
+  <nav>
+    Maybe we have navigation; maybe we don't! ¯\_(ツ)_/¯
+  </nav>
+
+  <h1>AskBob Marketplace</h1>
+
+  <section>
+    <h2>AskBob Build Folder</h2>
+
+    <form action="#">
+      <button id="buildFolderSelector">Select Folder</button>
+      <span id="buildFolderLabel">No Ask Bob build folder location selected</span>
+    </form>
+
+  </section>
+
 
   <!-- You can also require other files to run in this process -->
   <script src="./renderer.js"></script>
